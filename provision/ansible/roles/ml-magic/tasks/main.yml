@@ -1,0 +1,6 @@
+- name: Install kafkacat
+  apt:
+    name: ["kafkacat"]
+    update_cache: yes
+    state: latest
+

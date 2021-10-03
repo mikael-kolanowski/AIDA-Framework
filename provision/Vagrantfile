@@ -8,8 +8,8 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "aida"
   
   config.vm.provider "virtualbox" do |v|
-      v.memory = 4000
-      v.cpus = 2
+      v.memory = 7000
+      v.cpus = 6
   end
 
   # TODO Use rsync instead of virtualbox. Using virtualbox just for development.
@@ -17,11 +17,11 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "..", "/vagrant", type: "virtualbox"
 
   # dashboard folders
-  config.vm.synced_folder "../dashboard/vagrant", "/vagrant/vagrant", create: true
-  config.vm.synced_folder "../dashboard/frontend", "/srv/frontend", create: true, type: "rsync", rsync__exclude: ['node_modules/']
-  config.vm.synced_folder "../dashboard/backend", "/srv/backend", owner: "www-data"
+  #config.vm.synced_folder "../dashboard/vagrant", "/vagrant/vagrant", create: true
+  #config.vm.synced_folder "../dashboard/frontend", "/srv/frontend", create: true, type: "rsync", rsync__exclude: ['node_modules/']
+  #config.vm.synced_folder "../dashboard/backend", "/srv/backend", owner: "www-data"
 
-  config.vm.network :private_network, type: "dhcp"
+  #config.vm.network :private_network, type: "dhcp", name: "vboxnet1", adapter: 1
   # AIDA input port
   config.vm.network :forwarded_port, guest: 4164, host: 4164
   # REST API port
@@ -47,9 +47,9 @@ Vagrant.configure("2") do |config|
     ansible.config_file = "provision/ansible/ansible.cfg"
   end
 
-  config.vm.provision "ansible_local" do |dashboard|
-    dashboard.verbose = "v"
-    dashboard.playbook = "vagrant/playbook.yml"
-    dashboard.version = "latest"
-  end
+  #config.vm.provision "ansible_local" do |dashboard|
+    #dashboard.verbose = "v"
+    #dashboard.playbook = "vagrant/playbook.yml"
+    #dashboard.version = "latest"
+  #end
 end

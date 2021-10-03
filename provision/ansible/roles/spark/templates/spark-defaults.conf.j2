@@ -1,9 +1,13 @@
 spark.pyspark.python=python3
 spark.submit.pyFiles={{ spark_modules_zip }}
-spark.driver.memory=512m
+#spark.driver.memory=512m
+spark.driver.memory=1024m
 
 spark.ui.filters cz.muni.csirt.aida.spark.CorsFilter
 spark.ui.allowFramingFrom http://localhost:8080/
+
+# Compression
+spark.io.compression.codec=org.apache.spark.io.SnappyCompressionCodec
 
 # TODO enable (have to also create target dir because spark does not create it by itself
 spark.eventLog.enabled=false
